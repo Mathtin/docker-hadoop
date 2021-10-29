@@ -10,6 +10,7 @@ RUN ( \
     ovpn_getclient mynet-vpn-client \
     && echo route-nopull \
     && echo route 10.10.10.0 255.255.255.0 \
+    && echo ping-restart 0 \
     ) > /hadoop-cluster-1.ovpn
 
 CMD ["/bin/sh", "-c", "cat /hadoop-cluster-1.ovpn > /hadoop-cluster.ovpn; ovpn_run"]
