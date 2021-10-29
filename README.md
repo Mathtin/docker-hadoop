@@ -2,9 +2,23 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+Hadoop cluster named "lake" for testing and ETL development. Extended with flink, spark and hive
+
+## Java version
+
+OpenJDK 8
+
+Scala 2.13
+
 ## Hadoop Version
 
-Apache Hadoop 
+Apache Hadoop 3.3.1
+
+Apache Hive 3.1.2
+
+Spark 3.2.0
+
+Flink 1.13.2
 
 ## Quick Start
 
@@ -13,25 +27,18 @@ To deploy an example HDFS cluster, run:
   docker-compose up
 ```
 
-Run example wordcount job:
-```
-  make wordcount
-```
-
-Or deploy in swarm:
+To deploy in swarm:
 ```
 docker stack deploy -c docker-compose-v3.yml hadoop
 ```
 
+OpenVPN profile 'hadoop-cluster.ovpn' will appear in data directory
+
+Access services with links provided by Hadoop Index on [10.10.10.10](http://10.10.10.10)
+
 `docker-compose` creates a docker network that can be found by running `docker network list`, e.g. `dockerhadoop_default`.
 
-Run `docker network inspect` on the network (e.g. `dockerhadoop_default`) to find the IP the hadoop interfaces are published on. Access these interfaces with the following URLs:
-
-* Namenode: http://<dockerhadoop_IP_address>:9870/dfshealth.html#tab-overview
-* History server: http://<dockerhadoop_IP_address>:8188/applicationhistory
-* Datanode: http://<dockerhadoop_IP_address>:9864/
-* Nodemanager: http://<dockerhadoop_IP_address>:8042/node
-* Resource manager: http://<dockerhadoop_IP_address>:8088/
+Run `docker network inspect` on the network (e.g. `dockerhadoop_default`) to find the IP the hadoop interfaces are published on.
 
 ## Configure Environment Variables
 
@@ -56,5 +63,6 @@ The available configurations are:
 * /etc/hadoop/httpfs-site.xml HTTPFS_CONF
 * /etc/hadoop/kms-site.xml KMS_CONF
 * /etc/hadoop/mapred-site.xml  MAPRED_CONF
+* /etc/hive/conf/hive-site.xml  HIVE_CONF
 
 If you need to extend some other configuration file, refer to base/entrypoint.sh bash script.
