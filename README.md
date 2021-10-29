@@ -1,13 +1,10 @@
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/big-data-europe/Lobby)
+# Docker Hadoop Cluster
 
-# Changes
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Version 2.0.0 introduces uses wait_for_it script for the cluster startup
+## Hadoop Version
 
-# Hadoop Docker
-
-## Supported Hadoop Versions
-See repository branches for supported hadoop versions
+Apache Hadoop 
 
 ## Quick Start
 

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cluster Index</title>
+    <style>
+body {
+    background-color: #e7e7e7;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+div.outer-body {
+    background-color: #ffffff;
+    margin: 12px;
+}
+div.outer-header {
+    padding: 12px;
+}
+div.inner-header {
+    padding: 12px;
+    font-size: 20pt;
+    font-weight: Bold;
+}
+div.inner-body {
+    padding: 20px;
+    font-size: 12pt;
+    font-family: Monospace;
+}
+hr {
+    border: 2px solid #46b5f4;
+}
+table {
+    border-collapse: collapse;
+}
+td {
+    font-size: 18px;
+    padding: 8px;
+    color: #636363;
+    border: 1px solid #dddfe1;
+}
+td.table-section {
+    font-weight: bold;
+    color: #535353;
+    text-align: center;
+}
+tr {
+    background-color: #f9fafb;
+}
+td.head-column {
+    background-color: #54585d;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    border: 1px solid #54585d;
+}
+.link {
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+button.copy {
+    display: inline-block;
+    border: 1px solid transparent;
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+    position: relative;
+    top: 8px;
+    right: 2px;
+    opacity:0.5;
+    cursor:pointer;
+}
+button.copy:hover{
+    opacity:1;
+}
+button.copy:active{
+    opacity:1;
+    border: 1px solid black;
+}
+    </style>
+</head>
+<body>
+    <div class="outer-body">
+        <div class="outer-header">
+            <div class="inner-header">
+                <span>Lake Hadoop Cluster</span>
+            </div>
+            <hr>
+        </div>
+        <div class="inner-body">
+            <p>Usefull links:</p>
+            <table>
+                <tr>
+                    <td class="cluster-srv">HDFS</td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href="hdfs://lake">hdfs://lake</a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cluster-srv">HDFS Web Browser</td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href="http://10.10.10.21:9870/explorer.html#/">http://10.10.10.21:9870/explorer.html#/</a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cluster-srv">YARN Apps Overview</td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href="http://10.10.10.41:8088/cluster/apps">http://10.10.10.41:8088/cluster/apps</a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cluster-srv">Hive</td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href="jdbc://10.10.10.43:10000">jdbc://10.10.10.43:10000</a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cluster-srv">Hive WebUI</td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href="http://10.10.10.43:10002">http://10.10.10.43:10002</a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cluster-srv">Flink Job Manager</td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href="http://10.10.10.61">http://10.10.10.61</a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cluster-srv">Mail</td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href="http://10.10.10.12">http://10.10.10.12</a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+            </table>
+            <p>Services:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <td class="head-column">Service</td>
+                        <td class="head-column">Proto</td>
+                        <td class="head-column">Host</td>
+                        <td class="head-column">Port</td>
+                        <td class="head-column">Access path</td>
+                        <td class="head-column">Access URL</td>
+                    </tr>
+                </thead>
+                <tr><td colspan="6" class="table-section">HDFS</td></tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Namenode NN1</td>
+                    <td class="cluster-proto">hdfs</td>
+                    <td class="cluster-host">10.10.10.21</td>
+                    <td class="cluster-port">8020</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Namenode NN1 WebUI</td>
+                    <td class="cluster-proto">http</td>
+                    <td class="cluster-host">10.10.10.21</td>
+                    <td class="cluster-port">9870</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Datanode DN1</td>
+                    <td class="cluster-proto">ipc</td>
+                    <td class="cluster-host">10.10.10.31</td>
+                    <td class="cluster-port">9864</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr><td colspan="6" class="table-section">YARN</td></tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Resource Manager WebUI</td>
+                    <td class="cluster-proto">http</td>
+                    <td class="cluster-host">10.10.10.41</td>
+                    <td class="cluster-port">8088</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Resource Manager</td>
+                    <td class="cluster-proto">ipc</td>
+                    <td class="cluster-host">10.10.10.41</td>
+                    <td class="cluster-port">8032</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Scheduler</td>
+                    <td class="cluster-proto">ipc</td>
+                    <td class="cluster-host">10.10.10.41</td>
+                    <td class="cluster-port">8030</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Resource Tracker</td>
+                    <td class="cluster-proto">ipc</td>
+                    <td class="cluster-host">10.10.10.41</td>
+                    <td class="cluster-port">8031</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">History Server WebUI</td>
+                    <td class="cluster-proto">http</td>
+                    <td class="cluster-host">10.10.10.42</td>
+                    <td class="cluster-port">8188</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr><td colspan="6" class="table-section">Flink</td></tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Flink Job Manager</td>
+                    <td class="cluster-proto">http</td>
+                    <td class="cluster-host">10.10.10.61</td>
+                    <td class="cluster-port">80</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr><td colspan="6" class="table-section">Hive</td></tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Hive JDBC</td>
+                    <td class="cluster-proto">jdbc</td>
+                    <td class="cluster-host">10.10.10.43</td>
+                    <td class="cluster-port">10000</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Hive WebUI</td>
+                    <td class="cluster-proto">jdbc</td>
+                    <td class="cluster-host">10.10.10.43</td>
+                    <td class="cluster-port">10002</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Hive Metastore</td>
+                    <td class="cluster-proto">thrift</td>
+                    <td class="cluster-host">10.10.10.44</td>
+                    <td class="cluster-port">9083</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr><td colspan="6" class="table-section">Support Services</td></tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Cluster index</td>
+                    <td class="cluster-proto">http</td>
+                    <td class="cluster-host">10.10.10.10</td>
+                    <td class="cluster-port">80</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">Cluster VPN (OpenVPN)</td>
+                    <td class="cluster-proto">ovpn</td>
+                    <td class="cluster-host">10.10.10.11</td>
+                    <td class="cluster-port">1194</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">MailHog SMTP</td>
+                    <td class="cluster-proto">smtp</td>
+                    <td class="cluster-host">10.10.10.12</td>
+                    <td class="cluster-port">25</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">MailHog WebUI/API</td>
+                    <td class="cluster-proto">http</td>
+                    <td class="cluster-host">10.10.10.12</td>
+                    <td class="cluster-port">80</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+                <tr class="cluster-values">
+                    <td class="cluster-srv">PostgreSQL RDBMS</td>
+                    <td class="cluster-proto">jdbc</td>
+                    <td class="cluster-host">10.10.10.13</td>
+                    <td class="cluster-port">5432</td>
+                    <td>
+                        <span class="cluster-path link"></span>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                    <td>
+                        <a target="_blank" rel="noopener noreferrer" class="cluster-url link" href=""></a>
+                        <button class="copy"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <footer style="padding: 12px;">
+            <div style="padding: 12px; background-color: #46b5f4;font-size: 10pt;display: flex;font-weight: Bold;">
+                <div style="text-align: left;flex-grow: 1;">
+                    <span>local hadoop cluster</span>
+                </div>
+                <div style="text-align: right;flex-grow: 1;">
+                    <span>powered by docker</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+<script>
+    function copyTextToClipboard(text) {
+        if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(text);
+            return;
+        }
+        navigator.clipboard.writeText(text).then(function() {
+            console.log('Async: Copying to clipboard was successful!');
+        }, function(err) {
+            console.error('Async: Could not copy text: ', err);
+        });
+    }
+    function fallbackCopyTextToClipboard(text) {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+        
+        // Avoid scrolling to bottom
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Fallback: Copying text command was ' + msg);
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
+
+        document.body.removeChild(textArea);
+    }
+    var copyButtons = document.getElementsByClassName("copy");
+    for (var i=0; i < copyButtons.length; i++) {
+        copyButtons[i].addEventListener("click",function(){
+            copyTextToClipboard(this.parentElement.getElementsByClassName("link")[0].innerText);
+        },false);
+    }
+
+    function toPath(proto, host, port) {
+        if (port == undefined || port == null || port == "" || 
+            (proto == 'http' && port == "80") || 
+            (proto == 'smtp' && port == "25")) {
+            return host;
+        }
+        return host + ":" + port;
+    }
+    function toURL(proto, host, port) {
+        return proto + "://" + toPath(proto, host, port);
+    }
+    var clusterValues = document.getElementsByClassName("cluster-values");
+    for (var i=0; i < clusterValues.length; i++) {
+        let proto = clusterValues[i].getElementsByClassName("cluster-proto")[0].innerText;
+        let host = clusterValues[i].getElementsByClassName("cluster-host")[0].innerText;
+        let port = clusterValues[i].getElementsByClassName("cluster-port")[0].innerText;
+        clusterValues[i].getElementsByClassName("cluster-path")[0].innerText = toPath(proto, host, port);
+        let clusterUrlEl = clusterValues[i].getElementsByClassName("cluster-url")[0];
+        let clusterUrl = toURL(proto, host, port);
+        clusterUrlEl.innerText = clusterUrl;
+        clusterUrlEl.href = clusterUrl;
+    }
+
+</script>
+</html>

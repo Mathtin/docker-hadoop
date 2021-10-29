@@ -1,61 +1,203 @@
 version: "3"
 
 services:
-  namenode:
-    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
-    container_name: namenode
+  hadoop-index:
+    image: mathtin/hadoop-index:latest
+    container_name: hadoop-index
+    hostname: 10.10.10.10
     restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.10
+    environment:
+      SERVICE_PRECONDITION: "hadoop-mail:80 hadoop-mail:25 hadoop-namenode-nn1:8020 hadoop-namenode-nn1:9870 hadoop-resourcemanager:8088 flink-jobmanager:80"
     ports:
-      - 9870:9870
-      - 9000:9000
+      - 8080:80
+
+  hadoop-vpn:
+    image: mathtin/hadoop-vpn:latest
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    container_name: hadoop-vpn
+    hostname: 10.10.10.11
+    restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.11
+    command: ["/bin/sh", "-c", "sed 's/remote 127.0.0.1 1194 udp/remote 127.0.0.1 8194 udp/' /hadoop-cluster-1.ovpn > /hadoop-cluster.ovpn; ovpn_run"]
+    ports:
+      - 8194:1194/udp
     volumes:
-      - hadoop_namenode:/hadoop/dfs/name
+      - ./hadoop-cluster.ovpn:/hadoop-cluster.ovpn
+
+  hadoop-mail:
+    image: mathtin/mailhog:latest
+    container_name: hadoop-mail
+    hostname: 10.10.10.12
+    restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.12
     environment:
-      - CLUSTER_NAME=test
+      - MH_API_BIND_ADDR=0.0.0.0:80
+      - MH_UI_BIND_ADDR=0.0.0.0:80
+      - MH_SMTP_BIND_ADDR=0.0.0.0:25
+    volumes:
+      - ./data/mail:/home/mailhog/storage
+
+  hive-postgres-db:
+    image: postgres:14
+    container_name: hive-postgres-db
+    hostname: 10.10.10.13
+    restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.13
+    environment:
+      POSTGRES_DB: hive
+      POSTGRES_USER: hive
+      POSTGRES_PASSWORD: hive
+      POSTGRES_INITDB_ARGS: --auth-host=md5 --auth-local=md5
+    volumes:
+      - ./data/hive-postgres-db:/var/lib/postgresql/data
+
+  hadoop-namenode-nn1:
+    image: mathtin/hadoop-namenode:spark3.2.0-hive3.1.2-hadoop3.3.1-scala2.13-java8
+    container_name: hadoop-namenode-nn1
+    hostname: 10.10.10.21
+    restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.21
+    volumes:
+      - ./data/namenode-nn1:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=lake
     env_file:
       - ./hadoop.env
 
-  datanode:
-    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
-    container_name: datanode
+  hadoop-datanode-dn1:
+    image: mathtin/hadoop-datanode:spark3.2.0-hive3.1.2-hadoop3.3.1-scala2.13-java8
+    container_name: hadoop-datanode-dn1
+    hostname: 10.10.10.31
     restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.31
     volumes:
-      - hadoop_datanode:/hadoop/dfs/data
+      - ./data/datanode-dn1:/hadoop/dfs/data
     environment:
-      SERVICE_PRECONDITION: "namenode:9870"
+      SERVICE_PRECONDITION: "hadoop-namenode-nn1:9870"
     env_file:
       - ./hadoop.env
   
-  resourcemanager:
-    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
-    container_name: resourcemanager
+  hadoop-resourcemanager:
+    image: mathtin/hadoop-resourcemanager:spark3.2.0-hive3.1.2-hadoop3.3.1-scala2.13-java8
+    container_name: hadoop-resourcemanager
+    hostname: 10.10.10.41
     restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.41
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864"
+      SERVICE_PRECONDITION: "hadoop-namenode-nn1:8020 hadoop-namenode-nn1:9870 hadoop-datanode-dn1:9864"
+    env_file:
+      - ./hadoop.env
+  
+  hadoop-historyserver:
+    image: mathtin/hadoop-historyserver:spark3.2.0-hive3.1.2-hadoop3.3.1-scala2.13-java8
+    container_name: hadoop-historyserver
+    hostname: 10.10.10.42
+    restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.42
+    environment:
+      SERVICE_PRECONDITION: "hadoop-namenode-nn1:8020 hadoop-namenode-nn1:9870 hadoop-datanode-dn1:9864 hadoop-resourcemanager:8088"
+    volumes:
+      - ./data/historyserver:/hadoop/yarn/timeline
+    env_file:
+      - ./hadoop.env
+  
+  hive-server:
+    image: mathtin/hive:3.1.2-hadoop3.3.1-postgres14
+    container_name: hive-server
+    hostname: 10.10.10.43
+    restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.43
+    environment:
+      SERVICE_PRECONDITION: "hive-metastore:9083"
+    env_file:
+      - ./hadoop.env
+  
+  hive-metastore:
+    image: mathtin/hive:3.1.2-hadoop3.3.1-postgres14
+    container_name: hive-metastore
+    hostname: 10.10.10.44
+    restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.44
+    command: ["/run.sh", "metastore"]
+    environment:
+      SERVICE_PRECONDITION: "hadoop-namenode-nn1:8020 hadoop-namenode-nn1:9870 hadoop-datanode-dn1:9864 hive-postgres-db:5432"
     env_file:
       - ./hadoop.env
 
-  nodemanager1:
-    image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
-    container_name: nodemanager
+  hadoop-nodemanager-nm1:
+    image: mathtin/hadoop-nodemanager:spark3.2.0-hive3.1.2-hadoop3.3.1-scala2.13-java8
+    container_name: hadoop-nodemanager-nm1
+    hostname: 10.10.10.51
     restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.51
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
+      SERVICE_PRECONDITION: "hadoop-namenode-nn1:8020 hadoop-namenode-nn1:9870 hadoop-datanode-dn1:9864 hadoop-resourcemanager:8088"
     env_file:
       - ./hadoop.env
   
-  historyserver:
-    image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
-    container_name: historyserver
+  flink-jobmanager:
+    image: mathtin/flink:1.13.2-hadoop3.3.1-scala_2.11
+    container_name: flink-jobmanager
+    hostname: 10.10.10.61
     restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.61
+    command: jobmanager
     environment:
-      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
-    volumes:
-      - hadoop_historyserver:/hadoop/yarn/timeline
-    env_file:
-      - ./hadoop.env
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: 10.10.10.61
+        rest.port: 80
+        jobmanager.memory.process.size: 2g
   
-volumes:
-  hadoop_namenode:
-  hadoop_datanode:
-  hadoop_historyserver:
+  flink-taskmanager-ft1:
+    image: mathtin/flink:1.13.2-hadoop3.3.1-scala_2.11
+    depends_on:
+      - flink-jobmanager
+    container_name: flink-taskmanager-ft1
+    hostname: 10.10.10.71
+    restart: always
+    networks:
+      hadoop-net:
+        ipv4_address: 10.10.10.71
+    command: taskmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: 10.10.10.61
+        rest.port: 80
+        jobmanager.memory.process.size: 4g
+
+networks:
+  hadoop-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.10.0/24
+          ip_range: 10.10.10.0/24
+          gateway: 10.10.10.1
+
