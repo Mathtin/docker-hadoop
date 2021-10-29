@@ -31,6 +31,17 @@ function configure() {
     done
 }
 
+echo "#!/bin/sh" > /etc/profile.d/hadoop.sh
+chmod +x /etc/profile.d/hadoop.sh
+
+env | grep JAVA | sed 's/^/export /g' >> /etc/profile.d/hadoop.sh
+env | grep HADOOP | sed 's/^/export /g' >> /etc/profile.d/hadoop.sh
+env | grep YARN | sed 's/^/export /g' >> /etc/profile.d/hadoop.sh
+env | grep HDFS | sed 's/^/export /g' >> /etc/profile.d/hadoop.sh
+env | grep MAPRED | sed 's/^/export /g' >> /etc/profile.d/hadoop.sh
+env | grep HIVE | sed 's/^/export /g' >> /etc/profile.d/hadoop.sh
+env | grep SPARK | sed 's/^/export /g' >> /etc/profile.d/hadoop.sh
+echo "export PATH=$PATH" >> /etc/profile.d/hadoop.sh
 service ssh start
 
 configure /etc/hadoop/core-site.xml core CORE_CONF
