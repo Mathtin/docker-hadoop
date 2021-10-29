@@ -24,12 +24,6 @@ RUN apt-get update && apt-get install software-properties-common -y --no-install
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 #
-# Setup ssh
-#
-
-COPY config/ssh_config $HOME/.ssh/config
-
-#
 # Install Hadoop distr
 #
 
@@ -94,11 +88,18 @@ RUN set -x \
 # Setup enviroment
 #
 
+# SSH
+COPY config/ssh_config $HOME/.ssh/config
+COPY config/sshd_config /etc/ssh
+RUN passwd -d root
+
+# Hadoop
 RUN ln -s /opt/hadoop-$HADOOP_VERSION/etc/hadoop /etc/hadoop
 #COPY config/hadoop-env.sh /etc/hadoop/
 RUN mkdir /opt/hadoop-$HADOOP_VERSION/logs
 RUN mkdir /hadoop-data
 
+# Hive
 RUN mkdir -p /etc/hive
 RUN ln -s /opt/hive-$HIVE_VERSION/conf /etc/hive/conf
 COPY config/hive-site.xml /etc/hive/conf/
@@ -111,6 +112,7 @@ COPY config/llap-daemon-log4j2.properties /etc/hive/conf
 RUN mkdir /opt/hive-$HIVE_VERSION/logs
 RUN mkdir /hive-data
 
+# Spark
 RUN mkdir -p /etc/spark
 RUN ln -s /opt/spark-$SPARK_VERSION/conf /etc/spark/conf
 COPY config/spark-defaults.conf /etc/spark/conf/
@@ -119,6 +121,7 @@ COPY config/spark-log4j.properties /etc/spark/conf/log4j.properties
 RUN mkdir /opt/spark-$SPARK_VERSION/logs
 RUN mkdir /spark-data
 
+# Env
 ENV HDP_VERSION=$HADOOP_VERSION
 ENV HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION
 ENV HADOOP_CONF_DIR=/etc/hadoop
@@ -134,8 +137,7 @@ ENV MULTIHOMED_NETWORK=0
 ENV USER=root
 ENV PATH $SPARK_HOME/bin:$HIVE_HOME/bin:$HADOOP_HOME/bin:$PATH
 
+# Entrypoint
 ADD entrypoint.sh /entrypoint.sh
-
 RUN chmod a+x /entrypoint.sh
-
 ENTRYPOINT ["/entrypoint.sh"]
