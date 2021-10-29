@@ -1,0 +1,6 @@
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM no
+Host *
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null

@@ -18,10 +18,16 @@ RUN apt-get update && apt-get install software-properties-common -y --no-install
       netcat \
       gnupg \
       libsnappy-dev \
+      openssh-server \
     && rm -rf /var/lib/apt/lists/*
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
+#
+# Setup ssh
+#
+
+COPY config/ssh_config $HOME/.ssh/config
 
 #
 # Install Hadoop distr
@@ -89,27 +95,27 @@ RUN set -x \
 #
 
 RUN ln -s /opt/hadoop-$HADOOP_VERSION/etc/hadoop /etc/hadoop
-#COPY hadoop-env.sh /etc/hadoop/
+#COPY config/hadoop-env.sh /etc/hadoop/
 RUN mkdir /opt/hadoop-$HADOOP_VERSION/logs
 RUN mkdir /hadoop-data
 
 RUN mkdir -p /etc/hive
 RUN ln -s /opt/hive-$HIVE_VERSION/conf /etc/hive/conf
-COPY hive-site.xml /etc/hive/conf/
-COPY beeline-log4j2.properties /etc/hive/conf
-COPY hive-env.sh /etc/hive/conf
-COPY hive-exec-log4j2.properties /etc/hive/conf
-COPY hive-log4j2.properties /etc/hive/conf
-COPY ivysettings.xml /etc/hive/conf
-COPY llap-daemon-log4j2.properties /etc/hive/conf
+COPY config/hive-site.xml /etc/hive/conf/
+COPY config/beeline-log4j2.properties /etc/hive/conf
+COPY config/hive-env.sh /etc/hive/conf
+COPY config/hive-exec-log4j2.properties /etc/hive/conf
+COPY config/hive-log4j2.properties /etc/hive/conf
+COPY config/ivysettings.xml /etc/hive/conf
+COPY config/llap-daemon-log4j2.properties /etc/hive/conf
 RUN mkdir /opt/hive-$HIVE_VERSION/logs
 RUN mkdir /hive-data
 
 RUN mkdir -p /etc/spark
 RUN ln -s /opt/spark-$SPARK_VERSION/conf /etc/spark/conf
-COPY spark-defaults.conf /etc/spark/conf/
-#COPY spark-env.sh /etc/spark/conf/
-COPY spark-log4j.properties /etc/spark/conf/log4j.properties
+COPY config/spark-defaults.conf /etc/spark/conf/
+#COPY config/spark-env.sh /etc/spark/conf/
+COPY config/spark-log4j.properties /etc/spark/conf/log4j.properties
 RUN mkdir /opt/spark-$SPARK_VERSION/logs
 RUN mkdir /spark-data
 
