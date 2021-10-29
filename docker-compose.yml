@@ -24,11 +24,11 @@ services:
     networks:
       hadoop-net:
         ipv4_address: 10.10.10.11
-    command: ["/bin/sh", "-c", "sed 's/remote 127.0.0.1 1194 udp/remote 127.0.0.1 8194 udp/' /hadoop-cluster-1.ovpn > /hadoop-cluster.ovpn; ovpn_run"]
+    command: ["/bin/sh", "-c", "sed 's/remote 127.0.0.1 1194 udp/remote 127.0.0.1 8194 udp/' /hadoop-cluster-1.ovpn > /data/hadoop-cluster.ovpn; ovpn_run"]
     ports:
       - 8194:1194/udp
     volumes:
-      - ./hadoop-cluster.ovpn:/hadoop-cluster.ovpn
+      - ./data:/data
 
   hadoop-mail:
     image: mathtin/mailhog:latest
