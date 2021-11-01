@@ -95,7 +95,6 @@ RUN passwd -d root
 
 # Hadoop
 RUN ln -s /opt/hadoop-$HADOOP_VERSION/etc/hadoop /etc/hadoop
-#COPY config/hadoop-env.sh /etc/hadoop/
 RUN mkdir /opt/hadoop-$HADOOP_VERSION/logs
 RUN mkdir /hadoop-data
 
@@ -116,7 +115,6 @@ RUN mkdir /hive-data
 RUN mkdir -p /etc/spark
 RUN ln -s /opt/spark-$SPARK_VERSION/conf /etc/spark/conf
 COPY config/spark-defaults.conf /etc/spark/conf/
-#COPY config/spark-env.sh /etc/spark/conf/
 COPY config/spark-log4j.properties /etc/spark/conf/log4j.properties
 RUN mkdir /opt/spark-$SPARK_VERSION/logs
 RUN mkdir /spark-data

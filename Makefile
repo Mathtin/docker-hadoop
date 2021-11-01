@@ -30,15 +30,6 @@ image-push:
 	docker image push mathtin/flink:1.13.2-hadoop3.3.1-scala_2.11
 	docker image push mathtin/flink:latest
 
-config-install:
-	docker cp hadoop-resourcemanager:/etc/hadoop/core-site.xml /opt/hadoop-3.3.1/etc/hadoop/core-site.xml
-	docker cp hadoop-resourcemanager:/etc/hadoop/hdfs-site.xml /opt/hadoop-3.3.1/etc/hadoop/hdfs-site.xml
-	docker cp hadoop-resourcemanager:/etc/hadoop/yarn-site.xml /opt/hadoop-3.3.1/etc/hadoop/yarn-site.xml
-	docker cp hadoop-resourcemanager:/etc/hadoop/hadoop-env.sh /opt/hadoop-3.3.1/etc/hadoop/hadoop-env.sh
-	docker cp hadoop-resourcemanager:/etc/spark/conf/spark-env.sh /opt/spark-3.2.0/conf/spark-env.sh
-	docker cp hadoop-resourcemanager:/etc/spark/conf/log4j.properties /opt/spark-3.2.0/conf/log4j.properties
-	docker cp hadoop-resourcemanager:/etc/spark/conf/spark-defaults.conf /opt/spark-3.2.0/conf/spark-defaults.conf
-
 rebuild-cluster:
 	docker-compose down
 	make build

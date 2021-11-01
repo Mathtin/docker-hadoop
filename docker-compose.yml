@@ -11,8 +11,6 @@ services:
         ipv4_address: 10.10.10.10
     environment:
       SERVICE_PRECONDITION: "hadoop-mail:80 hadoop-mail:25 hadoop-namenode-nn1:8020 hadoop-namenode-nn1:9870 hadoop-resourcemanager:8088 flink-jobmanager:80"
-    ports:
-      - 8080:80
 
   hadoop-vpn:
     image: mathtin/hadoop-vpn:latest

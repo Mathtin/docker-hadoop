@@ -6,7 +6,7 @@ function hdfs_in_safe_mode() {
 
 echo "Archieving spark libs"
 
-tar -czf /tmp/spark-jars.tar.gz $SPARK_HOME/jars/* || (echo "FAILED TO START RESOURCE MANAGER"; sleep 4; false) || exit 1
+tar -czf /tmp/spark-jars.tar.gz -C $SPARK_HOME/jars . || (echo "FAILED TO START RESOURCE MANAGER"; sleep 4; false) || exit 1
 
 echo "Waiting for HDFS to leave safe mode"
 
@@ -15,6 +15,7 @@ while hdfs_in_safe_mode; do
 done
 
 hdfs dfs -mkdir -p /apps/spark
+hdfs dfs -mkdir -p /var/log/spark/apps
 
 echo "Uploading spark libs to HDFS"
 
